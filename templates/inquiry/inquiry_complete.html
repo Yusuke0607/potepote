@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}
+お問い合わせ完了 - {{ block.super }}
+{%endblock%}
+{% block content %}
+{% load static%}
+<div class="mt-3">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-md-7 col-lg-5 col-xl-5">
+            <h5>問い合わせが完了しました！</h5>
+            <p>担当よりご登録いたただいたメールアドレス宛にご連絡いたします。今しばらくお待ちください。</p>
+            <a type="button" data-mdb-ripple-init="" class="w-100 btn btn-link mb-3" href="{% url 'top' %}">トップに戻る</a>
+        </div>
+    <div>
+<div>
+{% endblock %}

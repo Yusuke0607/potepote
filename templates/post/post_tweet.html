@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>つぶやきを投稿</h2>
+<form method="post">
+{% csrf_token %}
+    <form method="post" action="{% url 'post_tweet' %}">
+        {% if error_message %}
+        <div class="alert alert-danger">
+            {{ error_message }}
+        </div>
+        {% endif %}
+        {% csrf_token %}
+        <div class="form-group mb-3">
+            <textarea name="content" class="form-control" id="id_content" rows="5" placeholder="ここに1000文字以内のつぶやきを入力してください..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mb-3">投稿</button>
+        <a type="button" data-mdb-ripple-init="" class="w-100 btn btn-link mb-3" href="{% url 'top' %}">戻る</a>
+    </form>
+    </div>
+</form>
+{% endblock %}

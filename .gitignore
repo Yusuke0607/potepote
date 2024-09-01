@@ -1,0 +1,7 @@
+db.sqlite3
+reviewsApp/local_settings.py
+key-pair-001.pem
+db.sqlite3
+/reviewsApp/migrations/__pycache__
+/reviewsApp/__pycache__
+*.pyc

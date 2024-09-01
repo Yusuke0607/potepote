@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+{% block navbar %}
+    {% comment %} 何も表示しない {% endcomment %}
+{% endblock %}
+{% load static%}
+<div class="mt-3">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-md-7 col-lg-5 col-xl-5">
+            <h5>ユーザー登録を申請しました！</h5>
+            <p>ユーザー登録は完了しておりません。担当から登録いただいたメールアドレスに正式なユーザー登録完了のご連絡させていただきます。今しばらくおまちくださいませ。</p>
+            <a type="button" data-mdb-ripple-init="" class="w-100 btn btn-link mb-3" href="{% url 'top' %}">ログイン画面に移動する</a>
+        </div>
+    <div>
+<div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}
+ユーザー情報設定 - {{ block.super }}
+{%endblock%}
+{% block content %}
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url 'top' %}">トップ</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">ユーザー情報設定</li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col-md-3 col-lg-3 col-xl-3">
+            <div class="list-group">
+                <a href="{% url 'edit_profile' %}" class="list-group-item list-group-item-action" aria-current="true">
+                    ユーザー情報設定
+                </a>
+                <a href="{% url 'change_password' %}" class="list-group-item list-group-item-action">パスワード変更</a>
+                <a href="{% url 'user_store_list' %}" class="list-group-item list-group-item-action active">ストア一覧</a>
+            </div>
+        </div>
+        <div class="col-md-9 col-lg-9 col-xl-9">
+            <h5>所属しているストア一覧</h5>
+            {% if stores %}
+            <ul class="list-group">
+                {% for store in stores %}
+                <li class="list-group-item">{{ store.name }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <div class="alert alert-secondary" role="alert">
+                所属しているストアはありません。ストアへの追加は会社管理者権限ユーザーのみ行えます。
+            </div>
+            {%endif%}
+                <a type="button" data-mdb-ripple-init="" class="w-100 btn btn-link mb-3" href="{% url 'top' %}">トップに戻る</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

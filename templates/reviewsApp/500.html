@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}
+無効なリンク- {{ block.super }}
+{%endblock%}
+{% block content %}
+{% load static%}
+<body>
+    <h5>処理にエラーが発生しました。</h5>
+    <p>時間をおいて再度アクセスください。繰り返し同じ状態が続く場合は<a href="{% url 'inquiry' %}">お問い合わせフォーム</a>からご連絡ください。</p></p>
+    <a type="button" data-mdb-ripple-init="" class="w-100 btn btn-link mb-3" href="{% url 'top' %}">トップに戻る</a>
+</body>
+</html>
+{% endblock %}

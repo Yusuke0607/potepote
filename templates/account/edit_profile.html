@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}
+ユーザー情報設定 - {{ block.super }}
+{%endblock%}
+{% block content %}
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url 'top' %}">トップ</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">ユーザー情報設定</li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col-md-3 col-lg-3 col-xl-3">
+            <div class="list-group">
+                <a href="{% url 'edit_profile' %}" class="list-group-item list-group-item-action active" aria-current="true">
+                    ユーザー情報設定
+                </a>
+                <a href="{% url 'change_password' %}" class="list-group-item list-group-item-action">パスワード変更</a>
+            </div>
+        </div>
+        <div class="col-md-9 col-lg-9 col-xl-9">
+            <h5>ユーザー情報設定</h5>
+            <form method="post">
+                {% csrf_token %}
+                {% if error_message %}
+                <div class="alert alert-danger">
+                    {{ error_message }}
+                </div>
+            {% endif %}
+            <div class="form-group mb-3">
+                <label for="id_username">ユーザー名</label>
+                <input type="text" name="username" class="form-control" id="username" value="{{ username }}">
+            </div>
+            <div class="form-group mb-3">
+                <label for="id_email">メールアドレス</label>
+                <input type="email" name="email" class="form-control" id="id_email" value="{{ form.email.value }}" required>
+            </div>
+            <button id="submitButton" type="submit" class="btn btn-primary w-100 mb-3">保存</button>
+            <a type="button" data-mdb-ripple-init="" class="w-100 btn btn-link mb-3" href="{% url 'top' %}">トップに戻る</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

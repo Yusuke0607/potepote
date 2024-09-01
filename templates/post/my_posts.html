@@ -1,0 +1,33 @@
+<!-- templates/my_posts.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>わたしのつぶやき</h2>
+<div class="col-12 col-md-12">
+    <div class ='form-group text-end mb-3'>
+    <a type ="button" data-mdb-ripple-init type="button" class="btn btn-primary ms-auto" href="{% url 'post_tweet' %}">
+        つぶやく
+    </a>
+</div>
+{% if user_posts %}
+<ul class="list-unstyled">
+    {% for item in user_posts %}
+    <li class="mb-3">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <span><span class ="bd-placeholder-img flex-shrink-0 me-2 rounded"><i class="fa-solid fa-circle-user"></i></span>{{ item.user.username }}</span>
+                <small>{{ item.created_at }}</small>
+            </div>
+            <div class="card-body">
+                <span class="post-comment">
+                {{ item.content }}
+                </span>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>まだポストはありません。</p>
+{% endif %}
+{% endblock %}

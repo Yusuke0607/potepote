@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}
+ユーザー登録申請 - {{ block.super }}
+{% endblock %}
+{% block content %}
+{% load static%}
+<div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+    <div class="col-md-8 col-lg-7 col-xl-5">
+        <img src="{% static "images/register_icon.svg"%}"
+        width="300" height="300" class="d-none d-sm-block mx-auto mb-3" alt="register">
+    </div>
+    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        <h5>ユーザー登録申請</h5>
+        <div class ="alret alert-info p-3 mb-3"><i class="fa-solid fa-circle-info me-3"></i>
+            ユーザー登録申請を行います。申請後、担当にて正式なユーザー登録を行います。後日、登録いただいたメールアドレス宛にユーザー登録完了のご連絡を差し上げます。
+        </div>
+        {% if error_message %}
+            <div class="alert alert-danger">
+                {{ error_message }}
+            </div>
+        {% endif %}
+        <form id="registerForm" method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                <label for="id_company_name">会社名</label>
+                <input type="text" name="company_name" class="form-control" id="id_company_name" value="{{ form.company_name.value }}" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="id_last_name">姓</label>
+                <input type="text" name="last_name" class="form-control" id="id_last_name" value="{{ form.last_name.value }}" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="id_first_name">名</label>
+                <input type="text" name="id_first_name" class="form-control" id="id_first_name" value="{{ form.first_name.value }}" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="id_email">メールアドレス</label>
+                <input type="email" name="email" class="form-control" id="id_email" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="id_password1">新しいパスワード</label>
+                <input type="password" name="password1" class="form-control" id="id_password1" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="id_password2">新しいパスワード (確認)</label>
+                <input type="password" name="password2" class="form-control" id="id_password2" required>
+            </div>
+            <button id="submitButton" type="submit" class="btn btn-primary w-100 mb-3">登録</button>
+            <div class ='form-group mb-3 text-center'>
+                <a type="button" data-mdb-ripple-init="" class="w-100 btn btn-link mb-3" href="{% url 'login' %}">ログイン画面に戻る</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

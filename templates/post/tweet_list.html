@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>届いたつぶやき</h2>
+<ul class="list-unstyled">
+    {% if received_posts %}
+    {% for item in received_posts %}
+    <li class="mb-3">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <span><span class ="bd-placeholder-img flex-shrink-0 me-2 rounded"><i class="fa-solid fa-circle-user"></i></span>{{ item.post.user.username }}</span>
+                <small>{{ item.post.created_at }}</small>
+            </div>
+            <div class="card-body">
+                <span class="post-comment">
+                {{ item.post.content }}
+                </span>
+            </div>
+            <div class="card-footer">
+                {% if not item.liked %}
+                <a href="#" onclick="likeTweet({{ item.post.id }})">お花を贈る</a>
+                {% else %}
+                    <span>贈り済み</span>
+                {% endif %}
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+    {% else %}
+    <p>新しく届いたつぶやきはありません</p>
+    {% endif %}
+</ul>
+<script>
+  function likeTweet(postId) {
+    fetch(`/like/${postId}/`, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}'
+      }
+    }).then(response => response.json()).then(data => {
+      if (data.status === 'liked') {
+        location.reload();
+      }
+    });
+  }
+</script>
+{% endblock %}

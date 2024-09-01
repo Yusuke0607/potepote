@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}
+無効なリンク- {{ block.super }}
+{%endblock%}
+{% block content %}
+{% load static%}
+<body>
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-5">
+                <img src="{% static "images/login_icon.svg"%}"
+                width="300" height="300" class="d-none d-sm-block mx-auto mb-3" alt="login">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <h5>このページは無効です。</h5>
+                <p>すでに消されたページか、ログアウトされている可能性があります。トップページに戻って操作をやり直してください。</p>
+                <a type="button" data-mdb-ripple-init="" class="w-100 btn btn-link mb-3" href="{% url 'top' %}">トップに戻る</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

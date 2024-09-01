@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}
+運営情報 - {{ block.super }}
+{%endblock%}
+{% block content %}
+<h5>運営会社情報</h5>
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-5">
+            <p class="text-muted mb-0">運営会社</p>
+            </div>
+            <div class="col-sm-7">
+            <p class="mb-0">株式会社ゆびすいコンサルティング　東京支店</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-5">
+            <p class="text-muted mb-0">運営会社HP</p>
+            </div>
+            <div class="col-sm-7">
+            <a href ="https://www.yubisui.co.jp/" target="_blank">https://www.yubisui.co.jp/</a>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-5">
+            <p class="text-muted mb-0">運営会社住所</p>
+            </div>
+            <div class="col-sm-7">
+                <p class="mb-0">〒102-0071　東京都千代田区富士見2-7-2 ステージビルディング9階</p>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+{% endblock %}

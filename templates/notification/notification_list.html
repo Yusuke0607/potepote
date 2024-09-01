@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block title %}
+お知らせ - {{ block.super }}
+{%endblock%}
+{% load static%}
+{% block content %}
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="{% url 'top' %}">トップ</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">お知らせ</li>
+    </ol>
+</nav>
+<div class="container">
+    <h5>未読のお知らせ</h5>
+    <div class="card mb-3">
+        <div class="card-body">
+        {% if unread_notifications %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col" style="width:50px;">タイトル</th>
+                <th scope="col" style="width:50px;">カテゴリ</th>
+                <th scope="col" style="width:50px;">通知日</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for notification in unread_notifications %}
+            <tr>
+                <td><a href="{% url 'notification_detail' notification.id %}">{{ notification.title }}</a></td>
+                <td>{{ notification.get_category_display}}</td>
+                <td>{{ notification.created_at|date:"Y/m/d"}}</td>
+                </small></td>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="text-muted mb-0">未読のお知らせはありません。</p>
+        {% endif %}
+        </div>
+    </div>
+    {% if unread_notifications.has_other_pages %}
+    <ul class="pagination justify-content-center">
+        {% if surveys.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ unread_notifications.previous_page_number }}">{{ unread_notifications.previous_page_number }}</a></li>
+        {% endif %}
+
+        <li class="page-item active"><a class="page-link" href="?page={{ unread_notifications.number }}">{{ unread_notifications.number }}</a></li>
+
+        {% if unread_notifications.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ unread_notifications.next_page_number }}">{{ unread_notifications.next_page_number }}</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ unread_notifications.paginator.num_pages }}">&raquo;</a></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+    <h5>既読のお知らせ</h5>
+    <div class="card mb-3">
+        <div class="card-body">
+        {% if read_notifications %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col" style="width:50px;">タイトル</th>
+                <th scope="col" style="width:50px;">カテゴリ</th>
+                <th scope="col" style="width:50px;">作成日</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for notification in read_notifications %}
+            <tr>
+                <td><a href="{% url 'notification_detail' notification.id %}">{{ notification.title }}</a></td>
+                <td>{{ notification.get_category_display }}</td>
+                <td>{{ notification.created_at|date:"Y/m/d"}}</td>
+                </small></td>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="text-muted mb-0">未読のお知らせはありません。</p>
+        {% endif %}
+        </div>
+    </div>
+    {% if read_notifications.has_other_pages %}
+    <ul class="pagination justify-content-center">
+        {% if surveys.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ read_notifications.previous_page_number }}">{{ read_notifications.previous_page_number }}</a></li>
+        {% endif %}
+
+        <li class="page-item active"><a class="page-link" href="?page={{ read_notifications.number }}">{{ read_notifications.number }}</a></li>
+
+        {% if read_notifications.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ read_notifications.next_page_number }}">{{ read_notifications.next_page_number }}</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ read_notifications.paginator.num_pages }}">&raquo;</a></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}

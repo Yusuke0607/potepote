@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ block.super }}
+{% endblock %}
+{% block head %}
+    {{ block.super }}
+    <link rel="canonical" href="https://MeBias.com">
+{% endblock %}
+{% block content %}
+{% load static%}
+{% if user.is_authenticated %}
+<div class="row">
+    <div class="col-12">
+        <h2>わたしのつぶやき</h2>
+        <div class="col-12 col-md-12">
+            <div class ='form-group text-end mb-3'>
+            <a type ="button" data-mdb-ripple-init type="button" class="btn btn-primary ms-auto" href="{% url 'post_tweet' %}">
+                つぶやく
+            </a>
+        </div>
+        {% if user_posts %}
+        <ul class="list-unstyled">
+            {% for item in user_posts %}
+            <li class="mb-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between p-3">
+                        <p class="text-muted small mb-0"><i class="far fa-clock"></i> {{ item.created_at }}</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex text-body-secondary pt-3">
+                            <span class ="bd-placeholder-img flex-shrink-0 me-2 rounded"><i class="fa-solid fa-circle-user fa-2x"></i></span>
+                            <p class="pb-3 mb-0 small lh-sm">
+                                {{ item.content }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>まだポストはありません。</p>
+        {% endif %}
+    </div>
+</div>
+{%else%}
+<div class="row flex-lg-row-reverse align-items-center mb-5">
+    <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+        <img src="{% static "images/logo.png"%}" alt="avatar" class="d-block mx-lg-auto img-fluid" alt="hero">
+        <h1 class="fw-light">Pilot Version</h1>
+        </div>
+    </div>
+    </section>
+</div>
+{%endif%}
+</html>
+{% endblock %}
